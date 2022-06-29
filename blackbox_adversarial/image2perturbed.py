@@ -67,7 +67,12 @@ class GlassesPerturbation:
 		nose_center = np.flip(get_points(im1)[27], 0)
 		return np.pad(self.glasses_mask, ((nose_center[0] - 12, 91 - nose_center[0]), (nose_center[1] - 33, 79 - nose_center[1])), mode='constant')
 
+	# def perturb_single_image(self, xs, im1): # batched
+	# 	im1_ = np.broadcast_to(im1, (xs.shape[0], im1.shape[0], im1.shape[1], im1.shape[2])).copy()
+	# 	im1_[np.where(np.broadcast_to(self.get_glasses_mask_for_image(im1), (xs.shape[0], im1.shape[0], im1.shape[1])))] = xs.reshape(-1, 3)
+	# 	return im1_
+
 	def perturb_single_image(self, xs, im1):
-		im1_ = np.broadcast_to(im1, (xs.shape[0], im1.shape[0], im1.shape[1], im1.shape[2])).copy()
-		im1_[np.where(np.broadcast_to(self.get_glasses_mask_for_image(im1), (xs.shape[0], im1.shape[0], im1.shape[1])))] = xs.reshape(-1, 3)
+		im1_ = np.array(im1, copy=True)
+		im1_[np.where(self.get_glasses_mask_for_image(im1))] = xs.reshape(-1, 3)
 		return im1_

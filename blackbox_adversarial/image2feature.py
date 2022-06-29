@@ -12,7 +12,7 @@ import numpy as np
 def get_model(backbone_type):
 	backbone_factory = BackboneFactory(backbone_type, "test_protocol/backbone_conf.yaml")
 	model_loader = ModelLoader(backbone_factory)
-	return model_loader.load_model(f"checkpoints/{backbone_type}.pt").eval()
+	return model_loader.load_model("checkpoints/" + backbone_type + ".pt").eval()
 
 def get_feature(image, m, batched = True):
 	if len(image.shape) == 3:

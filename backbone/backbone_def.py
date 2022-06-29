@@ -19,7 +19,7 @@ from backbone.resnest.resnest import ResNeSt
 from backbone.ReXNets import ReXNetV1
 from backbone.LightCNN import LightCNN
 from backbone.RepVGG import RepVGG
-from backbone.Swin_Transformer import SwinTransformer
+# from backbone.Swin_Transformer import SwinTransformer
 
 class BackboneFactory:
     """Factory to produce backbone according the backbone_conf.yaml.
@@ -33,8 +33,8 @@ class BackboneFactory:
         with open(backbone_conf_file) as f:
             backbone_conf = yaml.load(f, Loader=yaml.FullLoader)
             self.backbone_param = backbone_conf[backbone_type]
-        print('backbone param:')
-        print(self.backbone_param)
+        # print('backbone param:')
+        # print(self.backbone_param)
 
     def get_backbone(self):
         if self.backbone_type == 'MobileFaceNet':
