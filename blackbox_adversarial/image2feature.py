@@ -35,22 +35,3 @@ def get_feature(image, m, batched = True, mini_batch_size = 512): # with mini-ba
 		feature = feature[0]
 
 	return feature
-
-# def get_feature(image, m, batched = True):
-# 	if len(image.shape) == 3:
-# 		image = np.expand_dims(image, axis=0)
-# 		batched = False
-# 	image = (image.transpose((0, 3, 1, 2)) - 127.5) / 128.0
-# 	image = torch.from_numpy(image.astype(np.float32)).contiguous()
-	
-
-# 	with torch.no_grad(): 
-# 		images = image.to(next(m.parameters()).device)
-# 		feature = m(images)
-# 		feature = F.normalize(feature)
-# 		feature = feature.cpu().numpy()
-		
-# 	if not batched:
-# 		feature = feature[0]
-
-# 	return feature
