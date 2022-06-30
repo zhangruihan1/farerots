@@ -33,8 +33,8 @@ class BackboneFactory:
         with open(backbone_conf_file) as f:
             backbone_conf = yaml.load(f, Loader=yaml.FullLoader)
             self.backbone_param = backbone_conf[backbone_type]
-        # print('backbone param:')
-        # print(self.backbone_param)
+        print('backbone param:')
+        print(self.backbone_param)
 
     def get_backbone(self):
         if self.backbone_type == 'MobileFaceNet':

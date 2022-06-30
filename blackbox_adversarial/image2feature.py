@@ -14,7 +14,7 @@ def get_model(backbone_type):
 	model_loader = ModelLoader(backbone_factory)
 	return model_loader.load_model("checkpoints/" + backbone_type + ".pt").eval()
 
-def get_feature(image, m, batched = True, mini_batch_size = 512): # with mini-batch
+def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-batch
 	if len(image.shape) == 3:
 		image = np.expand_dims(image, axis=0)
 		batched = False
