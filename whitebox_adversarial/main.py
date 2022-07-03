@@ -15,8 +15,8 @@ from tqdm import trange
 # perturb = GlassesPerturbation()
 
 
-box = WhiteboxWithMultipleSystems('ReXNet', 'GhostNet')
-box2 = WhiteboxWithMultipleSystems('EfficientNet')
+box = WhiteboxWithMultipleSystems('ReXNet')
+box2 = WhiteboxWithMultipleSystems('EfficientNet', 'GhostNet')
 
 
 from PIL import Image
