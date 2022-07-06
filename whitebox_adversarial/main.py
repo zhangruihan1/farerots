@@ -16,7 +16,7 @@ from tqdm import trange
 
 
 box = WhiteboxWithMultipleSystems('ReXNet')
-box2 = WhiteboxWithMultipleSystems('EfficientNet', 'GhostNet')
+box2 = WhiteboxWithMultipleSystems('EfficientNet', 'ReXNet', 'GhostNet', 'TF-NAS', 'LightCNN')#, 'RepVGG')
 
 
 from PIL import Image
@@ -47,7 +47,7 @@ for k in trange(6000):
 
 		if sim_test < min_sim:
 			min_sim = sim_test
-			print(box.cosine_similarity(i1_, i1), min_sim)
+			print(box2.sims)
 			Image.fromarray(i1_.squeeze(0).astype(np.uint8)).save(f"../lfw/image_{k}_B_wblinf.png")
 			
 			# if min_sim < 0.4:

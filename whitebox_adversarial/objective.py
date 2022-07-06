@@ -66,5 +66,5 @@ class WhiteboxWithMultipleSystems(WhiteboxWithOneSystem):
 			
 			m.zero_grad()
 			sims.append(F.cosine_similarity(f1, f2))
-		
+		self.sims = [x.item() for x in sims]
 		return torch.stack(sims).amax(0), image_
