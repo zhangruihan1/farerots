@@ -16,7 +16,7 @@ from tqdm import trange
 
 
 box = WhiteboxWithMultipleSystems('r50')
-box2 = WhiteboxWithMultipleSystems('r50', 'EfficientNet', 'ReXNet', 'GhostNet', 'TF-NAS', 'LightCNN', 'RepVGG', 'AttentionNet')
+box2 = WhiteboxWithMultipleSystems('r50', 'EfficientNet', 'ReXNet')#, 'GhostNet', 'TF-NAS', 'LightCNN', 'RepVGG', 'AttentionNet')
 
 
 from PIL import Image
@@ -25,9 +25,9 @@ import csv
  
 min_sims = []
 
-for k in trange(6000):
+for k in trange(100):
 
-	with open(f'sims_RepVGG_{k}.csv', 'w', newline ='') as f:
+	with open(f'sims_r50_{k}.csv', 'w', newline ='') as f:
 
 		write = csv.writer(f)
 
