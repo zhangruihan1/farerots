@@ -87,8 +87,8 @@ GhostNet:
 
 AttentionNet:
     stage1_modules: 1
-    stage2_modules: 1
-    stage3_modules: 1
+    stage2_modules: 2
+    stage3_modules: 3
     feat_dim: 512
     out_h: 7
     out_w: 7
@@ -126,14 +126,14 @@ LightCNN:
     dropout_ratio: 0.2
 
 RepVGG:
-    blocks1: 4
-    blocks2: 6
-    blocks3: 16
+    blocks1: 2
+    blocks2: 4
+    blocks3: 14
     blocks4: 1
-    width1: 2
-    width2: 2
-    width3: 2
-    width4: 4
+    width1: 0.75
+    width2: 0.75
+    width3: 0.75
+    width4: 2.5
     out_h: 7
     out_w: 7
     feat_dim: 512

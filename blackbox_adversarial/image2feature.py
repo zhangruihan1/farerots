@@ -1,5 +1,6 @@
 import sys
 sys.path.append(".")
+sys.path.append('..')
 
 from test_protocol.utils.model_loader import ModelLoader
 from backbone.backbone_def import BackboneFactory
@@ -9,10 +10,19 @@ import torch.nn.functional as F
 
 import numpy as np
 
+from insightface.recognition.arcface_torch.backbones import get_model as insf_get_model
+
 def get_model(backbone_type):
-	backbone_factory = BackboneFactory(backbone_type, "test_protocol/backbone_conf.yaml")
-	model_loader = ModelLoader(backbone_factory)
-	return model_loader.load_model("checkpoints/" + backbone_type + ".pt").eval()
+
+	if backbone_type in ('r18', 'r34', 'r50', 'r100'):
+		m = insf_get_model(backbone_type).cuda()
+		m.load_state_dict(torch.load("checkpoints/" + backbone_type + ".pt"))
+		return m.eval()
+
+	else:	
+		backbone_factory = BackboneFactory(backbone_type, "test_protocol/backbone_conf.yaml")
+		model_loader = ModelLoader(backbone_factory)
+		return model_loader.load_model("checkpoints/" + backbone_type + ".pt").eval()
 
 def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-batch
 	if len(image.shape) == 3:
