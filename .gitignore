@@ -4,4 +4,4 @@ checkpoints/*
 *.png
 *.ipynb
 *.csv
-
+*.npy
