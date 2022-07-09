@@ -19,7 +19,7 @@ def get_model(backbone_type):
 		m = insf_get_model(backbone_type).cuda()
 		m.load_state_dict(torch.load("checkpoints/" + backbone_type + ".pt"))
 		return m.eval()
-		
+
 	elif backbone_type == "FaceNet":
 		return InceptionResnetV1(pretrained='vggface2').eval().cuda()
 
@@ -49,3 +49,7 @@ def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-ba
 		feature = feature[0]
 
 	return feature
+
+thresholds = {
+	'FaceNet':,
+	'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN'}	
