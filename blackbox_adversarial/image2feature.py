@@ -13,20 +13,39 @@ import numpy as np
 from insightface.recognition.arcface_torch.backbones import get_model as insf_get_model
 from facenet_pytorch import InceptionResnetV1
 
+thresholds = {
+	'FaceNet':64.01,
+	'r50':76.63,
+	'EfficientNet':76.95,
+	'ReXNet':76.29,
+	'AttentionNet':74,
+	'RepVGG':76.61,
+	'GhostNet':77.78,
+	'TF-NAS':75.86,
+	'LightCNN':77.52
+}
+
 def get_model(backbone_type):
 
 	if backbone_type in ('r18', 'r34', 'r50', 'r100'):
-		m = insf_get_model(backbone_type).cuda()
+		m = insf_get_model(backbone_type)
 		m.load_state_dict(torch.load("checkpoints/" + backbone_type + ".pt"))
-		return m.eval()
 
 	elif backbone_type == "FaceNet":
-		return InceptionResnetV1(pretrained='vggface2').eval().cuda()
+		m = InceptionResnetV1(pretrained='vggface2')
 
 	else:	
 		backbone_factory = BackboneFactory(backbone_type, "test_protocol/backbone_conf.yaml")
 		model_loader = ModelLoader(backbone_factory)
-		return model_loader.load_model("checkpoints/" + backbone_type + ".pt").eval()
+		m = model_loader.load_model("checkpoints/" + backbone_type + ".pt")
+
+	return {
+		'm':m.cuda().eval(),
+		'threshold':np.deg2rad(thresholds[backbone_type])
+	}
+
+
+		
 
 def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-batch
 	if len(image.shape) == 3:
@@ -50,6 +69,4 @@ def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-ba
 
 	return feature
 
-# thresholds = {
-# 	'FaceNet':,
-# 	'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN'}	
+

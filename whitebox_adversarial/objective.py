@@ -19,14 +19,14 @@ class WhiteboxWithOneSystem:
 		image = (images.transpose((0, 3, 1, 2)) - 127.5) / 128.0
 		image = torch.from_numpy(image.astype(np.float32)).contiguous()
 
-		image_ = image.to(next(self.m1.parameters()).device)
+		image_ = image.to(next(self.m1['m'].parameters()).device)
 		image_.requires_grad = True
-		feature_ = self.m1(image_)
+		feature_ = self.m1['m'](image_)
 		
 		f1 = feature_[:im1.shape[0]]
 		f2 = feature_[im1.shape[0]:]
 		
-		self.m1.zero_grad()
+		self.m1['m'].zero_grad()
 		return F.cosine_similarity(f1, f2), image_
 
 	def cosine_similarity(self, im1, im2):
@@ -54,17 +54,18 @@ class WhiteboxWithMultipleSystems(WhiteboxWithOneSystem):
 		image = (images.transpose((0, 3, 1, 2)) - 127.5) / 128.0
 		image = torch.from_numpy(image.astype(np.float32)).contiguous()
 
-		image_ = image.to(next(self.m1.parameters()).device)
+		image_ = image.to(next(self.m1['m'].parameters()).device)
 		image_.requires_grad = True
 
 		sims = []
 		for m in self.ms:
-			feature_ = m(image_)
+			feature_ = m['m'](image_)
 			
 			f1 = feature_[:im1.shape[0]]
 			f2 = feature_[im1.shape[0]:]
 			
-			m.zero_grad()
+			m['m'].zero_grad()
 			sims.append(F.cosine_similarity(f1, f2))
 		self.sims = [x.item() for x in sims]
+		self.y_preds = [x < self.m['threshold'] for x in self.sims]
 		return torch.stack(sims).amax(0), image_
