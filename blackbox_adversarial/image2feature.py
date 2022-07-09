@@ -11,6 +11,7 @@ import torch.nn.functional as F
 import numpy as np
 
 from insightface.recognition.arcface_torch.backbones import get_model as insf_get_model
+from facenet_pytorch import InceptionResnetV1
 
 def get_model(backbone_type):
 
@@ -18,6 +19,9 @@ def get_model(backbone_type):
 		m = insf_get_model(backbone_type).cuda()
 		m.load_state_dict(torch.load("checkpoints/" + backbone_type + ".pt"))
 		return m.eval()
+		
+	elif backbone_type == "FaceNet":
+		return InceptionResnetV1(pretrained='vggface2').eval().cuda()
 
 	else:	
 		backbone_factory = BackboneFactory(backbone_type, "test_protocol/backbone_conf.yaml")

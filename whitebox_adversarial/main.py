@@ -14,7 +14,7 @@ from tqdm import trange
 
 # perturb = GlassesPerturbation()
 
-my_systems = ['r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN']
+my_systems = ['FaceNet', 'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN']
 
 for my_system in my_systems:
 	print(my_system)
