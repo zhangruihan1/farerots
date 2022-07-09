@@ -50,6 +50,6 @@ def get_feature(image, m, batched = True, mini_batch_size = 256): # with mini-ba
 
 	return feature
 
-thresholds = {
-	'FaceNet':,
-	'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN'}	
+# thresholds = {
+# 	'FaceNet':,
+# 	'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVGG', 'GhostNet', 'TF-NAS', 'LightCNN'}	
