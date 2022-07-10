@@ -45,7 +45,7 @@ for my_system in my_systems:
 				g_1, _ = box.get_grads(i1_, i1)
 				i1_ = fgsm_attack(i1_, 1, g_1)
 
-				delta = np.clip(i2 - i1_, -5, 5)
+				delta = np.clip(i2 - i1_, -4, 4)
 				i1_ = np.clip(i2 + delta, 0, 255)
 
 				sim_test = box2.cosine_similarity(i1_, i1)
