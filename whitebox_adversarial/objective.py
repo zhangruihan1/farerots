@@ -68,4 +68,4 @@ class WhiteboxWithMultipleSystems(WhiteboxWithOneSystem):
 			sims.append(F.cosine_similarity(f1, f2))
 		self.sims = [x.item() for x in sims]
 		self.y_preds = [int(np.arccos(x) < m['threshold']) for x in self.sims]
-		return torch.stack(sims).amax(0), image_
+		return torch.stack(sims).mean(0), image_
