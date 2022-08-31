@@ -14,9 +14,9 @@ my_systems = ['FaceNet', 'r50', 'EfficientNet', 'ReXNet', 'AttentionNet', 'RepVG
 attack_success = {}
 attack_time = {}
 
-for Perturbation in [L2Perturbation, WhiteboxGlassesPerturbation, WhiteboxRectanglePerturbation, LinfPerturbation]:
+for Perturbation in [L2Perturbation(max_step_size=5), L2Perturbation(max_step_size=6), L2Perturbation(max_step_size=7), L2Perturbation(max_step_size=8), L2Perturbation(max_step_size=9), LinfPerturbation(max_step_size=1), LinfPerturbation(max_step_size=2), LinfPerturbation(max_step_size=2)]:
 	
-	perturb = Perturbation()
+	perturb = Perturbation
 
 	for my_system in my_systems:
 
@@ -27,7 +27,7 @@ for Perturbation in [L2Perturbation, WhiteboxGlassesPerturbation, WhiteboxRectan
 		
 		print(my_system, perturb.pname)
 
-		for k in trange(6000):
+		for k in trange(300):
 
 			# with open(f'y_preds_rex_{k}.csv', 'w', newline ='') as f:
 			# 	write = csv.writer(f)

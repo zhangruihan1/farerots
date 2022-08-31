@@ -35,7 +35,7 @@ class WhiteboxWithOneSystem:
 
 	def get_grads(self, im1, im2):
 		loss, image_ = self._shared_calculation(im1, im2)
-		(-loss).backward()
+		(-loss.mean()).backward()
 
 		grad = image_.grad.data.cpu().numpy()
 		g1 = grad[:im1.shape[0]].transpose((0, 2, 3, 1))
