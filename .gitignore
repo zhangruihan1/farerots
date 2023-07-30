@@ -6,3 +6,5 @@ checkpoints/*
 *.npy
 *.pkl
 *.xlsx
+.ipy*
+.ipy*/*
